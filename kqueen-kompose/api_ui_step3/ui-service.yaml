@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.service: ui
   name: ui
+  namespace: kqueen
 spec:
   type: NodePort
   ports:

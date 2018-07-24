@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.service: api
   name: api
+  namespace: kqueen
 spec:
   replicas: 1
   strategy: {}
@@ -32,7 +33,7 @@ spec:
         - name: KQUEEN_AUTH_MODULES
           value: local
         - name: KQUEEN_CONFIG_FILE
-          value: config/mirantis_demo.py
+          value: config/demo_mirantis.py
         - name: KQUEEN_DEBUG
           value: "True"
         - name: KQUEEN_ETCD_HOST
@@ -46,7 +47,6 @@ spec:
         - name: KQUEEN_SECRET_KEY
           value: SecretSecretSecret123
         image: vnaumov/kqueen-api:master
-#        image: vnaumov/kqueen-api:ss-mk3
         name: api
         ports:
         - containerPort: 5000

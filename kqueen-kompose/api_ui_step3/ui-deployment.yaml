@@ -8,6 +8,7 @@ metadata:
   labels:
     io.kompose.service: ui
   name: ui
+  namespace: kqueen
 spec:
   replicas: 1
   strategy: {}
@@ -40,7 +41,7 @@ spec:
         - name: KQUEENUI_SECRET_KEY
           value: SecretSecretSecret123
         - name: KQUEEN_UI_CONFIG_FILE
-          value: config/mirantis_demo.py
+          value: config/demo.py
 #        image: kqueen/ui:master
         image: vnaumov/kqueen-ui:master
         name: ui
