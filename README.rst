@@ -1,14 +1,14 @@
 # KQueen-ha-kompose
+
+
 KQueen deployment for K8s HA cluster ported with `Kompose utility <https://github.com/kubernetes/kompose>`_.
 
 Sources
 -------
 
-* Kqueen API:
-https://github.com/Mirantis/kqueen
+* `Kqueen API <https://github.com/Mirantis/kqueen>`_.
 
-* Kqueen UI:
-https://github.com/Mirantis/kqueen-ui
+* `Kqueen UI <https://github.com/Mirantis/kqueen-ui>`_.
 
 
 Openstack
