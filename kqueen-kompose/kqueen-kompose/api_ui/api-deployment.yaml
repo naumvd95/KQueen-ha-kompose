@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.demo.yml convert
+    kompose.version: 1.14.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: api
+  name: api
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: api
+    spec:
+      containers:
+      - env:
+        - name: BOOTSTRAP_ADMIN
+          value: "True"
+        - name: BOOTSTRAP_ADMIN_NAMESPACE
+          value: demoorg
+        - name: BOOTSTRAP_ADMIN_ORGANIZATION
+          value: DemoOrg
+        - name: BOOTSTRAP_ADMIN_PASSWORD
+          value: default
+        - name: BOOTSTRAP_ADMIN_USERNAME
+          value: admin
+        - name: KQUEEN_AUTH_MODULES
+          value: local
+        - name: KQUEEN_CONFIG_FILE
+          value: config/mirantis_demo.py
+        - name: KQUEEN_DEBUG
+          value: "True"
+        - name: KQUEEN_ETCD_HOST
+          value: etcd
+        - name: KQUEEN_LDAP_DN
+          value: cn=admin,dc=example,dc=org
+        - name: KQUEEN_LDAP_PASSWORD
+          value: heslo123
+        - name: KQUEEN_LDAP_URI
+          value: ldap://ldap
+        - name: KQUEEN_SECRET_KEY
+          value: SecretSecretSecret123
+        image: vnaumov/kqueen-api:master
+#        image: vnaumov/kqueen-api:ss-mk3
+        name: api
+        ports:
+        - containerPort: 5000
+        resources: {}
+      restartPolicy: Always
+status: {}

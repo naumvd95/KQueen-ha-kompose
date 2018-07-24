@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.demo.yml convert
+    kompose.version: 1.14.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: ui
+  name: ui
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: ui
+    spec:
+      containers:
+      - env:
+        - name: KQUEENUI_DEBUG
+          value: "True"
+        - name: KQUEENUI_KQUEEN_API_URL
+          value: http://api:5000/api/v1/
+        - name: KQUEENUI_KQUEEN_AUTH_URL
+          value: http://api:5000/api/v1/auth
+        - name: KQUEENUI_KQUEEN_SERVICE_USER_PASSWORD
+          value: default
+        - name: KQUEENUI_KQUEEN_SERVICE_USER_USERNAME
+          value: admin
+        - name: KQUEENUI_LDAP_AUTH_NOTIFY
+          value: "False"
+        - name: KQUEENUI_LOCAL_AUTH_NOTIFY
+          value: "True"
+        - name: KQUEENUI_MAIL_PORT
+          value: "10025"
+        - name: KQUEENUI_MAIL_SERVER
+          value: mail
+        - name: KQUEENUI_SECRET_KEY
+          value: SecretSecretSecret123
+        - name: KQUEEN_UI_CONFIG_FILE
+          value: config/mirantis_demo.py
+#        image: kqueen/ui:master
+        image: vnaumov/kqueen-ui:master
+        name: ui
+        ports:
+        - containerPort: 5080
+        resources: {}
+      restartPolicy: Always
+status: {}
