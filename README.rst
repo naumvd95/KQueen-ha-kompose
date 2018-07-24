@@ -11,15 +11,12 @@ https://github.com/Mirantis/kqueen
 https://github.com/Mirantis/kqueen-ui
 
 
-
-Deployments
-___________
-
-
 Openstack
----------
-* HA cluster needed
+~~~~~~~~~
 
+HA cluster needed
+
+.. code-block:: bash
 
     kubectl create ns kqueen
 
