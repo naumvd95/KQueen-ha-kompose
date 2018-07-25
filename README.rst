@@ -14,20 +14,45 @@ Sources
 Openstack
 ~~~~~~~~~
 
-HA cluster needed
+*Kqueen OS-cluster setup:*
 
-.. code-block:: bash
+# LBaaS should be configured on OS-cloud 
+# 3 master 3 slaves `Instruction <http://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-openstack-kubespray-engine>`_.
+# Go to one of master nodes
+# Download repo 
+# Check calico nodes
 
-    kubectl create ns kqueen
 
-    ## deploy os-pvc
-    kubectl apply -f ./kqueen-kompose/storage_step1/openstack_cloud/pvc/
+    .. code-block:: bash
+    
+        calicoctl node status 
 
-    ## deploy etcd with os-pvc
-    kubectl apply -f ./kqueen-kompose/storage_step1/openstack_cloud/
 
-    ## deploy kqueen-addons
-    kubectl apply -f ./kqueen-kompose/kqueen-addons_step2/
+# Deploy KQueen
 
-    ## deploy kqueen api/ui
-    kubectl apply -f ./kqueen-kompose/api_ui_step3/
+
+    .. code-block:: bash
+    
+        kubectl create ns kqueen
+    
+        ## deploy os-pvc
+        kubectl apply -f ./kqueen-kompose/storage_step1/openstack_cloud/pvc/
+    
+        ## deploy etcd with os-pvc
+        kubectl apply -f ./kqueen-kompose/storage_step1/openstack_cloud/
+    
+        ## deploy kqueen-addons
+        kubectl apply -f ./kqueen-kompose/kqueen-addons_step2/
+    
+        ## deploy kqueen api/ui
+        kubectl apply -f ./kqueen-kompose/api_ui_step3/
+
+
+# Get ``EXTERNAL_IP`` for UI service:
+
+ 
+    .. code-block:: bash
+    
+        kubectl get svc ui -n kqueen
+
+

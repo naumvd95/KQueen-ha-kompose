@@ -10,12 +10,10 @@ metadata:
   name: ui
   namespace: kqueen
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-  - name: "5080"
-    port: 5080
-    targetPort: 5080
-    nodePort: 30580
+    - port: 5080
+      targetPort: 5080
   selector:
     io.kompose.service: ui
 status:
