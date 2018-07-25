@@ -16,11 +16,11 @@ Openstack
 
 *Kqueen OS-cluster setup:*
 
-# LBaaS should be configured on OS-cloud 
-# 3 master 3 slaves `Instruction <http://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-openstack-kubespray-engine>`_.
-# Go to one of master nodes
-# Download repo 
-# Check calico nodes
+#. LBaaS should be configured on OS-cloud 
+#. 3 master 3 slaves `Instruction <http://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-openstack-kubespray-engine>`_.
+#. Go to one of master nodes
+#. Download repo 
+#. Check calico nodes
 
 
     .. code-block:: bash
@@ -28,7 +28,7 @@ Openstack
         calicoctl node status 
 
 
-# Deploy KQueen
+#. Deploy KQueen
 
 
     .. code-block:: bash
@@ -48,7 +48,7 @@ Openstack
         kubectl apply -f ./kqueen-kompose/api_ui_step3/
 
 
-# Get ``EXTERNAL_IP`` for UI service:
+#. Get ``EXTERNAL_IP`` for UI service:
 
  
     .. code-block:: bash
