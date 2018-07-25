@@ -46,7 +46,7 @@ spec:
           value: ldap://ldap
         - name: KQUEEN_SECRET_KEY
           value: SecretSecretSecret123
-        image: vnaumov/kqueen-api:master
+        image: kqueen/api:master
         name: api
         ports:
         - containerPort: 5000

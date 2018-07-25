@@ -42,8 +42,7 @@ spec:
           value: SecretSecretSecret123
         - name: KQUEEN_UI_CONFIG_FILE
           value: config/demo.py
-#        image: kqueen/ui:master
-        image: vnaumov/kqueen-ui:master
+        image: kqueen/ui:master
         name: ui
         ports:
         - containerPort: 5080
