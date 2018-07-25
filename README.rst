@@ -16,7 +16,8 @@ Openstack
 
 *Kqueen OS-cluster setup:*
 
-p.s. Yep i use KubernetesQueen to deploy kubernetes environment to deploy KubernetesQueen. Yep, its weird. But fun=)
+p.s. Yep i use KubernetesQueen to deploy kubernetes environment to deploy KubernetesQueen for kubernetes clusters deployments.
+Yep, its weird. But fun=)
 
 
 #. LBaaS should be configured on OS-cloud 
