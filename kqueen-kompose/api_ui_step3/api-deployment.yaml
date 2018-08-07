@@ -47,6 +47,7 @@ spec:
         - name: KQUEEN_SECRET_KEY
           value: SecretSecretSecret123
         image: kqueen/api:master
+        imagePullPolicy: Always
         name: api
         ports:
         - containerPort: 5000

@@ -43,6 +43,7 @@ spec:
         - name: KQUEEN_UI_CONFIG_FILE
           value: config/demo.py
         image: kqueen/ui:master
+        imagePullPolicy: Always
         name: ui
         ports:
         - containerPort: 5080
