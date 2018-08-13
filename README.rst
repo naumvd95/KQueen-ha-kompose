@@ -39,7 +39,8 @@ Yep, its weird. But fun=)
 
     .. code-block:: bash
     
-    
+        kubectl create ns kqueen 
+   
         ## deploy pvc
         kubectl apply -f ./kqueen-kompose/storage_step1/XXX_cloud/pvc/
     
