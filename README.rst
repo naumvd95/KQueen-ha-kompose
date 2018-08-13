@@ -42,10 +42,10 @@ Yep, its weird. But fun=)
         kubectl create ns kqueen 
    
         ## deploy pvc
-        kubectl apply -f ./kqueen-kompose/storage_step1/XXX_cloud/pvc/
+        kubectl apply -f ./kqueen-kompose/storage_step1/XXX_cloud/
     
         ## deploy etcd with pvc
-        kubectl apply -f ./kqueen-kompose/storage_step1/XXX_cloud/
+        kubectl apply -f ./kqueen-kompose/storage_step1/
     
         ## deploy kqueen-addons
         kubectl apply -f ./kqueen-kompose/kqueen-addons_step2/

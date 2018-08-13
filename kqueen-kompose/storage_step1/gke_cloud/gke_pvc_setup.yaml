@@ -12,7 +12,7 @@ parameters:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: claim-gke-kqueen
+  name: claim-kqueen
   namespace: kqueen
 spec:
   accessModes:

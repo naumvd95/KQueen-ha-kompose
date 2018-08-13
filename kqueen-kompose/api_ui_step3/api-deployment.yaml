@@ -52,5 +52,9 @@ spec:
         ports:
         - containerPort: 5000
         resources: {}
+      initContainers:
+      - name: init-etcd
+        image: busybox
+        command: ['sh', '-c', 'until curl http://etcd:4001/version ; do echo waiting for etcd; sleep 2; done;']
       restartPolicy: Always
 status: {}

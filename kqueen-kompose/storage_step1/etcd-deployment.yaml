@@ -45,6 +45,6 @@ spec:
       volumes:
       - name: kqueen-etcd
         persistentVolumeClaim:
-          claimName: claim-gke-kqueen
+          claimName: claim-kqueen
       restartPolicy: Always
 status: {}
