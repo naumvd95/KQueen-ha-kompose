@@ -1,0 +1,23 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: sc-gke-kqueen
+  namespace: kqueen
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  zones: us-central1-a, us-central1-b
+  replication-type: none
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: claim-gke-kqueen
+  namespace: kqueen
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi # pass here the size of the volume
+  storageClassName: sc-gke-kqueen

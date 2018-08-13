@@ -39,13 +39,12 @@ Yep, its weird. But fun=)
 
     .. code-block:: bash
     
-        kubectl create ns kqueen
     
-        ## deploy os-pvc
-        kubectl apply -f ./kqueen-kompose/storage_step1/openstack_cloud/pvc/
+        ## deploy pvc
+        kubectl apply -f ./kqueen-kompose/storage_step1/XXX_cloud/pvc/
     
-        ## deploy etcd with os-pvc
-        kubectl apply -f ./kqueen-kompose/storage_step1/openstack_cloud/
+        ## deploy etcd with pvc
+        kubectl apply -f ./kqueen-kompose/storage_step1/XXX_cloud/
     
         ## deploy kqueen-addons
         kubectl apply -f ./kqueen-kompose/kqueen-addons_step2/

@@ -1,0 +1,50 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose -f docker-compose.yml -f docker-compose.demo.yml convert
+    kompose.version: 1.14.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: etcd
+  name: etcd
+  namespace: kqueen
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: etcd
+    spec:
+      containers:
+      - env:
+        - name: ETCD_ADVERTISE_CLIENT_URLS
+          value: http://127.0.0.1:4001,http://etcd:4001
+        - name: ETCD_INITIAL_ADVERTISE_PEER_URLS
+          value: http://etcd:2380
+        - name: ETCD_INITIAL_CLUSTER_STATE
+          value: new
+        - name: ETCD_INITIAL_CLUSTER_TOKEN
+          value: etcd-cluster-1
+        - name: ETCD_LISTEN_CLIENT_URLS
+          value: http://0.0.0.0:4001
+        - name: ETCD_LISTEN_PEER_URLS
+          value: http://0.0.0.0:2380
+        - name: ETCD_NAME
+          value: "0"
+        image: quay.io/coreos/etcd:latest
+        name: etcd
+        ports:
+          - containerPort: 4001
+        volumeMounts:
+          - mountPath: "/0.etcd/"
+            name: kqueen-etcd
+        resources: {}
+      volumes:
+      - name: kqueen-etcd
+        persistentVolumeClaim:
+          claimName: claim-gke-kqueen
+      restartPolicy: Always
+status: {}
