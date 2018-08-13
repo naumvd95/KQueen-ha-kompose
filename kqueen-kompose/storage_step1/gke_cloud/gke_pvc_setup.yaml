@@ -6,8 +6,7 @@ metadata:
 provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-standard
-  zones: us-central1-a, us-central1-b
-  replication-type: none
+
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
