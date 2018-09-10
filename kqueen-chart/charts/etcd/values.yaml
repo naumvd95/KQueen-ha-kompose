@@ -1,4 +1,5 @@
 replicas: 1 #
+antiAffinity: "soft" # or "hard"
 
 peerPort: 2380
 clientPort: 4001
