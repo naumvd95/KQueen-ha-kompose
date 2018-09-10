@@ -1,7 +1,8 @@
 replicas: 1 #
 
 peerPort: 2380
-clientPort: 2379
+clientPort: 4001
+clientToken: etcd-cluster-1
 
 image:
   repository: quay.io/coreos/

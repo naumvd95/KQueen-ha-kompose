@@ -13,11 +13,35 @@ spec:
   template:
     metadata:
       name: {{ template "etcd.fullname" . }}
-      labels/:
+      labels:
         heritage: {{ .Release.Service | quote }}
         release: {{ .Release.Name | quote }}
         chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         app: {{ template "etcd.fullname" . }}
+    spec:
+      {{- if eq .Values.antiAffinity "hard"}}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values: ["{{ template "etcd.fullname" . }}"]
+            topologyKey: kubernetes.io/hostname
+      {{- else if eq .Values.antiAffinity "soft"}}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values: ["{{ template "etcd.fullname" . }}"]
+              topologyKey: kubernetes.io/hostname
+      {{- end}}
     spec:
       containers:
       - name: {{ template "etcd.fullname" . }}
