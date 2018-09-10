@@ -12,11 +12,10 @@ image:
   pullPolicy: IfNotPresent
 
 persistence:
-  type: PersistentVolumeClaim # or emptyDir or hostPath
-
-  #storageClass: ""
+  type: PersistentVolumeClaim # allowed options [emptyDir, hostPath]
+  storageProvisioner: openstack # allowed options [gce]
+  storageClass: "kqueen-sc"
   volumeSize: 10Gi
-
   hostPath: ""
 
 resources:

@@ -68,21 +68,21 @@ spec:
           - name: ETCD_NAME
             value: "kqueen"
         volumeMounts:
-        - name: kqueen-etcd
+        - name: kqueen-data
           mountPath: "/kqueen.etcd/"
       volumes:
       {{- if eq .Values.persistence.type "emptyDir" }}
-      - name: datadir
+      - name: kqueen-data
         emptyDir: {}
       {{- else if eq .Values.persistence.type "hostPath" }}
-      - name: datadir
+      - name: kqueen-data
         hostPath:
           path: "{{ .Values.persistence.hostPath }}"
       {{- end }}
   {{- if eq .Values.persistence.type "PersistentVolumeClaim" }}
   volumeClaimTemplates:
   - metadata:
-      name: datadir
+      name: kqueen-data
       {{- if .Values.persistence.storageClass }}
       annotations:
         volume.beta.kubernetes.io/storage-class: "{{ .Values.persistence.storageClass }}"

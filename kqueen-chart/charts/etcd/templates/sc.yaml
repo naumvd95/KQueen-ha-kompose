@@ -1,0 +1,13 @@
+{{- if eq .Values.persistence.type "PersistentVolumeClaim" }}
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ .Values.persistence.storageClass }} 
+  {{- if eq .Values.persistence.storageProvisioner "gce" }}
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard
+  {{- else if eq .Values.persistence.storageProvisioner "openstack" }}
+provisioner: kubernetes.io/cinder
+  {{- end }}
+{{- end }}
