@@ -1,0 +1,6 @@
+name: etcd
+version: v3.3.9
+description: Distributed reliable key-value store for the most critical data of a
+  distributed system.
+icon: https://raw.githubusercontent.com/coreos/etcd/master/logos/etcd-horizontal-color.png
+appVersion: latest

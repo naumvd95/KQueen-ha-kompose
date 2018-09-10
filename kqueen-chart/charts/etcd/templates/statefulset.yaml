@@ -1,0 +1,71 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: {{ template "etcd.fullname" . }}
+  labels:
+    heritage: {{ .Release.Service | quote }}
+    release: {{ .Release.Name | quote }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    app: {{ template "etcd.fullname" . }}
+spec:
+  serviceName: {{ template "etcd.fullname" . }}
+  replicas: {{ .Values.replicas }}
+  template:
+    metadata:
+      name: {{ template "etcd.fullname" . }}
+      labels/:
+        heritage: {{ .Release.Service | quote }}
+        release: {{ .Release.Name | quote }}
+        chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+        app: {{ template "etcd.fullname" . }}
+    spec:
+      containers:
+      - name: {{ template "etcd.fullname" . }}
+        image: "{{ .Values.image.repository }}{{ .Values.image.name }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+          - containerPort: {{ .Values.peerPort }}
+            name: peer
+          - containerPort: {{ .Values.clientPort }}
+            name: client
+        env:
+          - name: ETCD_ADVERTISE_CLIENT_URLS
+            value: http://127.0.0.1:{{ .Values.clientPort }},http://etcd:{{ .Values.clientPort }}
+          - name: ETCD_INITIAL_ADVERTISE_PEER_URLS
+            value: http://etcd:{{ .Values.peerPort }}
+          - name: ETCD_INITIAL_CLUSTER_STATE
+            value: new
+          - name: ETCD_INITIAL_CLUSTER_TOKEN
+            value: {{ .Values.clientToken }}
+          - name: ETCD_LISTEN_CLIENT_URLS
+            value: http://0.0.0.0:{{ .Values.clientPort }}
+          - name: ETCD_LISTEN_PEER_URLS
+            value: http://0.0.0.0:{{ .Values.peerPort }}
+          - name: ETCD_NAME
+            value: "kqueen"
+        volumeMounts:
+        - name: kqueen-etcd
+          mountPath: "/kqueen.etcd/"
+      volumes:
+      {{- if eq .Values.persistence.type "emptyDir" }}
+      - name: datadir
+        emptyDir: {}
+      {{- else if eq .Values.persistence.type "hostPath" }}
+      - name: datadir
+        hostPath:
+          path: "{{ .Values.persistence.hostPath }}"
+      {{- end }}
+  {{- if eq .Values.persistence.type "PersistentVolumeClaim" }}
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+      {{- if .Values.persistence.storageClass }}
+      annotations:
+        volume.beta.kubernetes.io/storage-class: "{{ .Values.persistence.storageClass }}"
+      {{- end }}
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: {{ .Values.persistence.volumeSize }}
+  {{- end }}

@@ -1,0 +1,26 @@
+replicas: 1 #
+
+peerPort: 2380
+clientPort: 2379
+
+image:
+  repository: quay.io/coreos/
+  name: etcd
+  tag: v3.3.9
+  pullPolicy: IfNotPresent
+
+persistence:
+  type: PersistentVolumeClaim # or emptyDir or hostPath
+
+  #storageClass: ""
+  volumeSize: 10Gi
+
+  hostPath: ""
+
+resources:
+  #requests:
+  #  cpu: 100m
+  #  memory: 512Mi
+  #limits:
+  #  cpu: 4
+  #  memory: 10Gi
