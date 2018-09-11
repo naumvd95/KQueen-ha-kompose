@@ -85,7 +85,7 @@ spec:
       name: kqueen-data
       {{- if .Values.persistence.storageClass }}
       annotations:
-        volume.beta.kubernetes.io/storage-class: "{{ .Values.persistence.storageClass }}"
+        volume.beta.kubernetes.io/storage-class: kqueen-sc
       {{- end }}
     spec:
       accessModes: [ "ReadWriteOnce" ]

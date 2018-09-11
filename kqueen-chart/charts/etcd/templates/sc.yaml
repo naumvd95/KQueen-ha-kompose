@@ -2,7 +2,7 @@
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
-  name: {{ .Values.persistence.storageClass }} 
+  name: kqueen-sc
   {{- if eq .Values.persistence.storageProvisioner "gce" }}
 provisioner: kubernetes.io/gce-pd
 parameters:
