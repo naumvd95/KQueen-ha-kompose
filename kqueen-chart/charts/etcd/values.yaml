@@ -1,5 +1,6 @@
 replicas: 1 #
 antiAffinity: "soft" # or "hard"
+deploymentNamespace: kqueen # run 'kubectl create ns kqueen' before
 
 peerPort: 2380
 clientPort: 4001
