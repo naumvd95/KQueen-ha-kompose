@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: {{ template "etcd.fullname" . }}
+  name: etcd 
   namespace: {{ .Values.deploymentNamespace }}
   labels:
     heritage: {{ .Release.Service | quote }}
@@ -9,11 +9,11 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ template "etcd.fullname" . }}
 spec:
-  serviceName: {{ template "etcd.fullname" . }}
+  serviceName: etcd 
   replicas: {{ .Values.replicas }}
   template:
     metadata:
-      name: {{ template "etcd.fullname" . }}
+      name: etcd 
       labels:
         heritage: {{ .Release.Service | quote }}
         release: {{ .Release.Name | quote }}
@@ -45,7 +45,7 @@ spec:
       {{- end}}
     spec:
       containers:
-      - name: {{ template "etcd.fullname" . }}
+      - name: etcd 
         image: "{{ .Values.image.repository }}{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:

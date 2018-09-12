@@ -1,0 +1,104 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "kqueen-chart.fullname" . }}
+  labels:
+    app: {{ template "kqueen-chart.name" . }}
+    chart: {{ template "kqueen-chart.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "kqueen-chart.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "kqueen-chart.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-api
+          image: "{{ .Values.apiImage.repository }}:{{ .Values.apiImage.tag }}"
+          imagePullPolicy: {{ .Values.apiImage.pullPolicy }}
+          env:
+            - name: BOOTSTRAP_ADMIN
+              value: {{ .Values.apiBootstrapAdmin }}
+            - name: BOOTSTRAP_ADMIN_NAMESPACE
+              value: {{ .Values.apiAdminNamespace }}
+            - name: BOOTSTRAP_ADMIN_ORGANIZATION
+              value: {{ .Values.apiAdminOrg }}
+            - name: BOOTSTRAP_ADMIN_PASSWORD
+              value: {{ .Values.apiAdminPassword }}
+            - name: BOOTSTRAP_ADMIN_USERNAME
+              value: {{ .Values.apiAdminUsername }}
+            - name: KQUEEN_AUTH_MODULES
+              value: {{ .Values.apiAuthModules }}
+            - name: KQUEEN_CONFIG_FILE
+              value: {{ .Values.apiConfigFile }}
+            - name: KQUEEN_DEBUG
+              value: {{ .Values.apiDebug }}
+            - name: KQUEEN_ETCD_HOST
+              value: {{ .Values.apiEtcdHost }}
+            - name: KQUEEN_LDAP_DN
+              value: {{ .Values.apiLdapDn }}
+            - name: KQUEEN_LDAP_PASSWORD
+              value: {{ .Values.apiLdapPassword }}
+            - name: KQUEEN_LDAP_URI
+              value: {{ .Values.apiLdapUri }}
+            - name: KQUEEN_SECRET_KEY
+              value: {{ .Values.apiSecretkey }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.apiPort }}
+          livenessProbe:
+            httpGet:
+              path: /api/v1
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /api/v1
+              port: http
+          resources: {}
+          initContainers:
+          - name: init-etcd
+            image: yauritux/busybox-curl
+            command: ['sh', '-c', 'until curl http://{{ .Values.apiEtcdHost }}:4001/version ; do echo waiting for etcd; sleep 2; done;']
+          restartPolicy: Always
+        - name: {{ .Chart.Name }}-ui
+          image: "{{ .Values.uiImage.repository }}:{{ .Values.uiImage.tag }}"
+          imagePullPolicy: {{ .Values.uiImage.pullPolicy }}
+          env:
+            - name: KQUEENUI_DEBUG
+              value: {{ .Values.uiDebug }}
+            - name: KQUEENUI_KQUEEN_API_URL
+              value: http://{{ .Chart.Name }}-api:{{ .Values.apiPort }}/api/v1/
+            - name: KQUEENUI_KQUEEN_AUTH_URL
+              value: http://{{ .Chart.Name }}-api:{{ .Values.apiPort }}/api/v1/auth
+            - name: KQUEENUI_KQUEEN_SERVICE_USER_PASSWORD
+              value: {{ .Values.apiAdminPassword }}
+            - name: KQUEENUI_KQUEEN_SERVICE_USER_USERNAME
+              value: {{ .Values.apiAdminUsername }}
+            - name: KQUEENUI_LDAP_AUTH_NOTIFY
+              value: {{ .Values.uiLdapAuthNotify }}
+            - name: KQUEENUI_LOCAL_AUTH_NOTIFY
+              value: {{ .Values.uiLocalAuthNotify }}
+            - name: KQUEENUI_MAIL_PORT
+              value: {{ .Values.uiMailPort }}
+            - name: KQUEENUI_MAIL_SERVER
+              value: {{ .Values.uiMailServer }}
+            - name: KQUEENUI_SECRET_KEY
+              value: {{ .Values.uiSecretKey }}
+            - name: KQUEEN_UI_CONFIG_FILE
+              value: {{ .Values.uiConfigFile }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.uiPort }}
+          livenessProbe:
+            httpGet:
+              path: /ui/login
+              port: http
+          resources: {}
+          restartPolicy: Always

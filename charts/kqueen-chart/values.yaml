@@ -1,0 +1,46 @@
+# Default values for kqueen-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+apiImage:
+  repository: kqueen/api
+  tag: master
+  pullPolicy: always
+
+uiImage:
+  repository: kqueen/ui
+  tag: master
+  pullPolicy: always
+
+# Api options
+apiBootstrapAdmin: "True"
+apiAdminNamespace: demoorg
+apiAdminOrg: DemoOrg
+apiAdminPassword: default
+apiAdminUsername: admin
+apiAuthModules: local
+apiConfigFile: config/demo_mirantis.py
+apiDebug: "True"
+apiEtcdHost: etcd # dependens on etcd-chart
+apiLdapDn: "cn=admin,dc=example,dc=org"
+apiLdapPassword: heslo123
+apiLdapUri: ldap://ldap
+apiSecretkey: SecretSecretSecret123
+
+apiPort: 5000
+
+# Ui options
+Values.uiDebug: "True"
+Values.uiLdapAuthNotify: "False"
+Values.uiLocalAuthNotify: "True"
+Values.uiMailPort: 10025
+Values.uiMailServer: mail # need to deploy separate mail server
+Values.uiSecretKey: SecretSecretSecret123
+Values.uiConfigFile: config/demo.py
+
+uiPort: 5080
+uiService:
+  type: LoadBalancer
+  port: 5080

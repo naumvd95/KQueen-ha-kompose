@@ -1,19 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "kqueen-chart.fullname" . }}
+  name: {{ template "kqueen-chart.fullname" . }}-api
   labels:
     app: {{ template "kqueen-chart.name" . }}
     chart: {{ template "kqueen-chart.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+    - port: {{ .Values.apiPort }}
+      targetPort: {{ .Values.apiPort }}
   selector:
     app: {{ template "kqueen-chart.name" . }}
     release: {{ .Release.Name }}
