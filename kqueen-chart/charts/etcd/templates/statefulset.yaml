@@ -92,4 +92,5 @@ spec:
       resources:
         requests:
           storage: {{ .Values.persistence.volumeSize }}
+      storageClassName: kqueen-sc
   {{- end }}
