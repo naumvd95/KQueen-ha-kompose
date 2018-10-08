@@ -80,7 +80,7 @@ Helm-guide
 
 
 #. Export k8s config or upload repo directly on master node
-#. Overwrite helm values if necessary (`charts/XXX/values.yaml`)
+#. Overwrite helm values in `charts/XXX/values.yaml` (`GKE` provider defined by default)
 #. Verify charts
 
 
