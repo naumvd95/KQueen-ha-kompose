@@ -2,7 +2,6 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ template "kqueen-chart.fullname" . }}
-  namespace: {{ .Values.deploymentNamespace }}
   labels:
     app: {{ template "kqueen-chart.name" . }}
     chart: {{ template "kqueen-chart.chart" . }}
