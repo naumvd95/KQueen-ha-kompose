@@ -2,6 +2,7 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ template "kqueen-chart.fullname" . }}
+  namespace: {{ .Values.deploymentNamespace }}
   labels:
     app: {{ template "kqueen-chart.name" . }}
     chart: {{ template "kqueen-chart.chart" . }}
@@ -25,31 +26,31 @@ spec:
           imagePullPolicy: {{ .Values.apiImage.pullPolicy }}
           env:
             - name: BOOTSTRAP_ADMIN
-              value: {{ .Values.apiBootstrapAdmin }}
+              value: "{{ .Values.apiBootstrapAdmin }}"
             - name: BOOTSTRAP_ADMIN_NAMESPACE
-              value: {{ .Values.apiAdminNamespace }}
+              value: "{{ .Values.apiAdminNamespace }}"
             - name: BOOTSTRAP_ADMIN_ORGANIZATION
-              value: {{ .Values.apiAdminOrg }}
+              value: "{{ .Values.apiAdminOrg }}"
             - name: BOOTSTRAP_ADMIN_PASSWORD
-              value: {{ .Values.apiAdminPassword }}
+              value: "{{ .Values.apiAdminPassword }}"
             - name: BOOTSTRAP_ADMIN_USERNAME
-              value: {{ .Values.apiAdminUsername }}
+              value: "{{ .Values.apiAdminUsername }}"
             - name: KQUEEN_AUTH_MODULES
-              value: {{ .Values.apiAuthModules }}
+              value: "{{ .Values.apiAuthModules }}"
             - name: KQUEEN_CONFIG_FILE
-              value: {{ .Values.apiConfigFile }}
+              value: "{{ .Values.apiConfigFile }}"
             - name: KQUEEN_DEBUG
-              value: {{ .Values.apiDebug }}
+              value: "{{ .Values.apiDebug }}"
             - name: KQUEEN_ETCD_HOST
-              value: {{ .Values.apiEtcdHost }}
+              value: "{{ .Values.apiEtcdHost }}"
             - name: KQUEEN_LDAP_DN
-              value: {{ .Values.apiLdapDn }}
+              value: "{{ .Values.apiLdapDn }}"
             - name: KQUEEN_LDAP_PASSWORD
-              value: {{ .Values.apiLdapPassword }}
+              value: "{{ .Values.apiLdapPassword }}"
             - name: KQUEEN_LDAP_URI
-              value: {{ .Values.apiLdapUri }}
+              value: "{{ .Values.apiLdapUri }}"
             - name: KQUEEN_SECRET_KEY
-              value: {{ .Values.apiSecretkey }}
+              value: "{{ .Values.apiSecretkey }}"
           ports:
             - name: http
               containerPort: {{ .Values.apiPort }}
@@ -72,27 +73,27 @@ spec:
           imagePullPolicy: {{ .Values.uiImage.pullPolicy }}
           env:
             - name: KQUEENUI_DEBUG
-              value: {{ .Values.uiDebug }}
+              value: "{{ .Values.uiDebug }}"
             - name: KQUEENUI_KQUEEN_API_URL
-              value: http://{{ .Chart.Name }}-api:{{ .Values.apiPort }}/api/v1/
+              value: "http://{{ .Chart.Name }}-api:{{ .Values.apiPort }}/api/v1/"
             - name: KQUEENUI_KQUEEN_AUTH_URL
-              value: http://{{ .Chart.Name }}-api:{{ .Values.apiPort }}/api/v1/auth
+              value: "http://{{ .Chart.Name }}-api:{{ .Values.apiPort }}/api/v1/auth"
             - name: KQUEENUI_KQUEEN_SERVICE_USER_PASSWORD
-              value: {{ .Values.apiAdminPassword }}
+              value: "{{ .Values.apiAdminPassword }}"
             - name: KQUEENUI_KQUEEN_SERVICE_USER_USERNAME
-              value: {{ .Values.apiAdminUsername }}
+              value: "{{ .Values.apiAdminUsername }}"
             - name: KQUEENUI_LDAP_AUTH_NOTIFY
-              value: {{ .Values.uiLdapAuthNotify }}
+              value: "{{ .Values.uiLdapAuthNotify }}"
             - name: KQUEENUI_LOCAL_AUTH_NOTIFY
-              value: {{ .Values.uiLocalAuthNotify }}
+              value: "{{ .Values.uiLocalAuthNotify }}"
             - name: KQUEENUI_MAIL_PORT
-              value: {{ .Values.uiMailPort }}
+              value: "{{ .Values.uiMailPort }}"
             - name: KQUEENUI_MAIL_SERVER
-              value: {{ .Values.uiMailServer }}
+              value: "{{ .Values.uiMailServer }}"
             - name: KQUEENUI_SECRET_KEY
-              value: {{ .Values.uiSecretKey }}
+              value: "{{ .Values.uiSecretKey }}"
             - name: KQUEEN_UI_CONFIG_FILE
-              value: {{ .Values.uiConfigFile }}
+              value: "{{ .Values.uiConfigFile }}"
           ports:
             - name: http
               containerPort: {{ .Values.uiPort }}

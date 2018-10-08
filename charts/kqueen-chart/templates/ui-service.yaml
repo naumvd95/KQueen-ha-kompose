@@ -1,7 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "kqueen-chart.fullname" . }}-ui
+  name: {{ .Chart.Name }}-ui
+  namespace: {{ .Values.deploymentNamespace }}
   labels:
     app: {{ template "kqueen-chart.name" . }}
     chart: {{ template "kqueen-chart.chart" . }}

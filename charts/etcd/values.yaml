@@ -14,7 +14,7 @@ image:
 
 persistence:
   type: PersistentVolumeClaim # allowed options [emptyDir, hostPath]
-  storageProvisioner: openstack # allowed options [gce]
+  storageProvisioner: gce # allowed options [gce, openstack]
   volumeSize: 10Gi
   hostPath: ""
 

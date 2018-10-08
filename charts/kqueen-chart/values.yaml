@@ -3,16 +3,17 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
+deploymentNamespace: kqueen # run 'kubectl create ns kqueen' before
 
 apiImage:
   repository: kqueen/api
   tag: master
-  pullPolicy: always
+  pullPolicy: Always
 
 uiImage:
   repository: kqueen/ui
   tag: master
-  pullPolicy: always
+  pullPolicy: Always
 
 # Api options
 apiBootstrapAdmin: "True"
@@ -32,13 +33,13 @@ apiSecretkey: SecretSecretSecret123
 apiPort: 5000
 
 # Ui options
-Values.uiDebug: "True"
-Values.uiLdapAuthNotify: "False"
-Values.uiLocalAuthNotify: "True"
-Values.uiMailPort: 10025
-Values.uiMailServer: mail # need to deploy separate mail server
-Values.uiSecretKey: SecretSecretSecret123
-Values.uiConfigFile: config/demo.py
+uiDebug: "True"
+uiLdapAuthNotify: "False"
+uiLocalAuthNotify: "True"
+uiMailPort: 10025
+uiMailServer: mail # need to deploy separate mail server
+uiSecretKey: SecretSecretSecret123
+uiConfigFile: config/demo.py
 
 uiPort: 5080
 uiService:
