@@ -96,7 +96,7 @@ Helm-guide
     .. code-block:: bash
 
         ## dry-run
-        helm build dep charts/kqueen-chart
+        helm dep build charts/kqueen-chart
         helm install --dry-run --debug charts/kqueen-chart -n kqueen
 
 
