@@ -19,11 +19,24 @@ Yep, its weird. But fun=)
 Reqirements
 -----------
 
+* Works properly with:
+
+    .. code-block:: bash
+    
+        ➜  KQueen-ha-kompose git:(master) ✗ helm version
+        Client: &version.Version{SemVer:"v2.9.1", GitCommit:"20adb27c7c5868466912eebdf6664e7390ebe710", GitTreeState:"clean"}
+        Server: &version.Version{SemVer:"v2.9.1", GitCommit:"20adb27c7c5868466912eebdf6664e7390ebe710", GitTreeState:"clean"}
+
+        ➜  KQueen-ha-kompose git:(master) ✗ kubectl version
+        Client Version: version.Info{Major:"1", Minor:"10", GitVersion:"v1.10.3"}
+        Server Version: version.Info{Major:"1", Minor:"9+", GitVersion:"v1.9.7-gke.6"}
+
+
 *Kqueen OS-cluster setup:*
 
 
 * LBaaS should be configured on OS-cloud
-* 3 master 3 worker `Instruction <http://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-openstack-kubespray-engine>`_.
+* 3-master/3-worker cluster `Instruction <http://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-openstack-kubespray-engine>`_.
 * Go to one of master nodes
 * Verify that all k8s cluster components working properly:
 
@@ -38,7 +51,7 @@ Reqirements
 *Kqueen GKE-cluster setup:*
 
 
-* 3 worker `Instruction <https://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-google-kubernetes-engine>`_.
+* 3-worker cluster `Instruction <https://kqueen.readthedocs.io/en/latest/kqueen.html#provision-a-kubernetes-cluster-using-google-kubernetes-engine>`_.
 
 
 Kompose-guide
