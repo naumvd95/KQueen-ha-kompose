@@ -2,6 +2,7 @@
 
 
 KQueen deployment for K8s HA cluster ported with `Kompose utility <https://github.com/kubernetes/kompose>`_.
+
 KQueen chart for K8s HA cluster ported with `Helm <https://github.com/helm/helm>`_.
 
 Sources
