@@ -41,7 +41,7 @@ spec:
             - name: KQUEEN_DEBUG
               value: "{{ .Values.apiDebug }}"
             - name: KQUEEN_ETCD_HOST
-              value: "{{ .Values.apiEtcdHost }}"
+              value: "{{ .Values.global.etcdHostname }}"
             - name: KQUEEN_LDAP_DN
               value: "{{ .Values.apiLdapDn }}"
             - name: KQUEEN_LDAP_PASSWORD

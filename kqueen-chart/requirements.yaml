@@ -1,4 +1,4 @@
 dependencies:
 - name: etcd
   version: ^3.x
-  repository: file://../etcd
+  repository: file://charts/etcd/

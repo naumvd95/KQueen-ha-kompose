@@ -1,3 +1,8 @@
+## Defualt values for running etcd as-single-chart
+## NOTE: In case of change, refer all changes to kqueen-parent chart.
+## For simple using, do not touch it, just use parent values.yml
+global:
+  etcdHostname: etcd
 replicas: 1 #
 antiAffinity: "soft" # or "hard"
 

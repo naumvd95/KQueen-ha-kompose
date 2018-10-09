@@ -100,7 +100,7 @@ Helm-guide
     .. code-block:: bash
 
         ## verify syntax
-        helm lint charts/XXX
+        find . -name 'Chart*' -print0 | xargs -0 -n1 dirname | sort --unique | xargs helm lint
 
 
 #. Dry-run
@@ -109,8 +109,7 @@ Helm-guide
     .. code-block:: bash
 
         ## dry-run
-        helm dep build charts/kqueen-chart
-        helm install --dry-run --debug charts/kqueen-chart -n kqueen
+        helm install --dry-run --debug kqueen-chart -n kqueen
 
 
 #. Build chart and dependency-charts
@@ -118,7 +117,7 @@ Helm-guide
 
     .. code-block:: bash
 
-        helm package charts/kqueen-chart -u
+        helm package kqueen-chart
 
 
 #. Deploy KQueen
@@ -126,5 +125,4 @@ Helm-guide
 
     .. code-block:: bash
 
-        kubectl create ns kqueen
         helm install --debug kqueen-chart-*VERSION*.tgz -n kqueen --namespace kqueen

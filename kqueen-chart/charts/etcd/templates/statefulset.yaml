@@ -1,18 +1,18 @@
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
-  name: etcd 
+  name: {{ .Values.global.etcdHostname }}
   labels:
     heritage: {{ .Release.Service | quote }}
     release: {{ .Release.Name | quote }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ template "etcd.fullname" . }}
 spec:
-  serviceName: etcd 
+  serviceName: {{ .Values.global.etcdHostname }}
   replicas: {{ .Values.replicas }}
   template:
     metadata:
-      name: etcd 
+      name: {{ .Values.global.etcdHostname }}
       labels:
         heritage: {{ .Release.Service | quote }}
         release: {{ .Release.Name | quote }}
@@ -44,7 +44,7 @@ spec:
       {{- end}}
     spec:
       containers:
-      - name: etcd 
+      - name: {{ .Values.global.etcdHostname }}
         image: "{{ .Values.image.repository }}{{ .Values.image.name }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
@@ -54,9 +54,9 @@ spec:
             name: client
         env:
           - name: ETCD_ADVERTISE_CLIENT_URLS
-            value: http://127.0.0.1:{{ .Values.clientPort }},http://etcd:{{ .Values.clientPort }}
+            value: http://127.0.0.1:{{ .Values.clientPort }},http://{{ .Values.global.etcdHostname }}:{{ .Values.clientPort }}
           - name: ETCD_INITIAL_ADVERTISE_PEER_URLS
-            value: http://etcd:{{ .Values.peerPort }}
+            value: http://{{ .Values.global.etcdHostname }}:{{ .Values.peerPort }}
           - name: ETCD_INITIAL_CLUSTER_STATE
             value: new
           - name: ETCD_INITIAL_CLUSTER_TOKEN

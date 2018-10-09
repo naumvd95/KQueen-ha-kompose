@@ -1,14 +1,14 @@
 # Default values for kqueen-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+global:
+  etcdHostname: etcd
 
 replicaCount: 1
-
 apiImage:
   repository: kqueen/api
   tag: master
   pullPolicy: Always
-
 uiImage:
   repository: kqueen/ui
   tag: master
@@ -44,3 +44,32 @@ uiPort: 5080
 uiService:
   type: LoadBalancer
   port: 5080
+
+# etcd subchart
+etcd:
+  replicas: 1 #
+  antiAffinity: "soft" # or "hard"
+  
+  peerPort: 2380
+  clientPort: 4001
+  clientToken: etcd-cluster-1
+  
+  image:
+    repository: quay.io/coreos/
+    name: etcd
+    tag: v3.3.9
+    pullPolicy: IfNotPresent
+  
+  persistence:
+    type: PersistentVolumeClaim # allowed options [emptyDir, hostPath]
+    storageProvisioner: gce # allowed options [gce, openstack]
+    volumeSize: 10Gi
+    hostPath: ""
+  
+  resources:
+    #requests:
+    #  cpu: 100m
+    #  memory: 512Mi
+    #limits:
+    #  cpu: 4
+    #  memory: 10Gi

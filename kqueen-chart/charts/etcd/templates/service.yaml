@@ -4,7 +4,7 @@ metadata:
  annotations:
    service.alpha.kubernetes.io/tolerate-unready-endpoints: "true"
 metadata:
-  name: etcd
+  name: {{ .Values.global.etcdHostname }}
   labels:
     heritage: {{ .Release.Service | quote }}
     release: {{ .Release.Name | quote }}
