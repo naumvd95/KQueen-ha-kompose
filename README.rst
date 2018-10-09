@@ -93,7 +93,7 @@ Helm-guide
 
 
 #. Export k8s config or upload repo directly on master node
-#. Configure helm values in `kqueen-chart/values.yaml` (`GKE` provider defined by default)
+#. Configure helm values in ``kqueen-chart/values.yaml`` (``GKE`` provider defined by default)
 #. Verify charts
 
 
@@ -121,4 +121,4 @@ Helm-guide
         helm install --debug kqueen-chart-*VERSION*.tgz -n kqueen --namespace kqueen
 
 
-* ``PAY ATTENTION`` Overwrite helm values in `kqueen-chart/charts/etcd/values.yaml` may break kqueen deployment, all common etcd-vars can be configured from kqueen-values.
+* **PAY ATTENTION** Overwrite helm values in ``kqueen-chart/charts/etcd/values.yaml`` may break kqueen deployment, all common etcd-vars can be configured from kqueen-values.
