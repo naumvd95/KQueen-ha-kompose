@@ -14,6 +14,14 @@ spec:
   ports:
     - port: 5080
       targetPort: 5080
+    # if LBaaS not working
+    #  type: NodePort
+    #  ports:
+    #  - name: http
+    #    port: 5080
+    #    targetPort: 5080
+    #    nodePort: 30580
+    #    protocol: TCP
   selector:
     io.kompose.service: ui
 status:
